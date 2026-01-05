@@ -1,6 +1,7 @@
 import requests 
 from bs4 import BeautifulSoup
 import logging
+
 #web scrappers for the pages used, for now i'll do it like one specific scrapper per page
 #initializing logger for the module
 logger = logging.getLogger(__name__)

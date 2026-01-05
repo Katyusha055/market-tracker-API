@@ -2,6 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import web_scrapper as ws
+
 #setting up the logging system
 def setup_logging():
     log_dir = Path("logs")
