@@ -2,6 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import web_scrapper as ws
+import normalizer as nz
 
 #setting up the logging system
 def setup_logging():
@@ -29,4 +30,11 @@ def setup_logging():
     root.addHandler(file_handler)
     root.addHandler(console)
 
-print(ws.newegg_scrapper())
+raw_data = ws.newegg_scrapper()
+normalized_strings = []
+
+for i in raw_data:
+    to_append = nz.normalizer(i.get('description'), i.get("price"))
+    normalized_strings.append(to_append)
+
+print(normalized_strings)
