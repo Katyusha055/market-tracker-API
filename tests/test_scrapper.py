@@ -1,6 +1,6 @@
 import pytest
 import requests
-from program import web_scrapper as ws
+from program.scrapper import web_scrapper as ws
 
 #testing the "happy path" or normal case
 def test_scrapper_1(monkeypatch):

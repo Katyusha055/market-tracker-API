@@ -1,8 +1,8 @@
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-import web_scrapper as ws
-import normalizer as nz
+import program.scrapper.web_scrapper as ws
+import program.normalizers.normalizer as nz
 
 #setting up the logging system
 def setup_logging():
