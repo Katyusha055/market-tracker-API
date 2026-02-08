@@ -28,7 +28,7 @@ def test_scrapper_1(monkeypatch):
 
     result = ws.newegg_scrapper()
 
-    assert result == [{'description':'RAM stick', 'price':'123'}]
+    assert result == [{'description':'RAM stick', 'price':'123', 'source': 'Newegg'}]
 
 #testing the case where the connection goes wrong
 def test_scrapper_2(monkeypatch):

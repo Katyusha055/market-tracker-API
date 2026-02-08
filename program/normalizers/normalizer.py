@@ -2,7 +2,7 @@ import re
 #data = ws.newegg_scrapper()[5].get('description')
 #data = 'G.SKILL Flare X Series 64GB (2 x 32GB) 288-Pin PC RAM DDR5 6000 (PC5 48000) Desktop Memory Model F5-6000J3040G32GX2-FX5'
 #print(data) all this was for testing
-def normalizer(data, price):
+def normalizer(data, price, source):
     #ram quantity
     reg_ex = r'(\d{1,3})GB'
     ram_quantity = re.findall(reg_ex, data)
@@ -78,5 +78,5 @@ def normalizer(data, price):
             break #only if there is something inside the match it breaks
     if not ram_brand:
         ram_brand.append('Other Brands') #in case the brand in the listing does not appear on the list of brands
-    return {'Ram Quantity':ram_quantity, 'Ram Type':ram_type, 'Ram Speed':ram_speed, 'Ram Brand':ram_brand, 'Original String': data, 'Price':price}
+    return {'Ram Quantity':ram_quantity, 'Ram Type':ram_type, 'Ram Speed':ram_speed, 'Ram Brand':ram_brand, 'Original String': data, 'Price':price, 'Source': source}
 

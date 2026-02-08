@@ -28,7 +28,8 @@ def newegg_scrapper():
             description = description_tag.get_text(strip=True)
             store = {
                 'description': description,
-                'price': price}
+                'price': price,
+                'source': 'Newegg'}
             data.append(store)
     else:
         raise ConnectionError(f'Unable to retrieve data, code: {response.status_code}')

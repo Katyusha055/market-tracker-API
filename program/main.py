@@ -34,7 +34,7 @@ raw_data = ws.newegg_scrapper()
 normalized_strings = []
 
 for i in raw_data:
-    to_append = nz.normalizer(i.get('description'), i.get("price"))
+    to_append = nz.normalizer(i.get('description'), i.get("price"), i.get('source'))
     normalized_strings.append(to_append)
 
 print(normalized_strings)
