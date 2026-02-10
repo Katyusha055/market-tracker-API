@@ -12,7 +12,7 @@ class RAM_object:
         self.source = source
         self.raw_listing = raw_listing
 
-test = {'Ram Quantity': ['64', '32'], 'Ram Type': ['DDR5'], 'Ram Speed': ['6000'], 'Ram Brand': ['Corsair'], 'Original String': 'CORSAIR Dominator Titanium 64GB (2 x 32GB) DDR5 6000 (PC5 48000) Desktop Memory Model CMP64GX5M2B6000Z30', 'Price': '$1,179.99–', 'Source': 'Newegg'}
+#test = {'Ram Quantity': ['32', '16'], 'Ram Type': ['DDR5'], 'Ram Speed': ['6400'], 'Ram Brand': ['Other Brands'], 'Original String': 'V-COLOR Manta XSky DDR5 32GB (2x16GB) 6400MHz CL32 1.4V SK Hynix IC RGB Gaming Desktop Upgrade Memory Module Black, for AMD EXPO TMXSAL1664832KWK', 'Price': '$499.99–', 'Source': 'Newegg'}
 
 #the last normalizer that gives an object ready for sql
 def sql_normalizer(ram_dict):
@@ -29,7 +29,10 @@ def sql_normalizer(ram_dict):
         modules = int(int(Quantity_list[0])/int(Quantity_list[1])) #here i am dividing these numbers as ram quantity is usualy divisible
     else:
         modules = 1
-    gb_per_module = int(Quantity_list[1])
+    if modules == 1:
+        gb_per_module = None
+    else:
+        gb_per_module = int(Quantity_list[1])
 
     Raw_price = ram_dict.get('Price')
     Temp_price = Raw_price.replace('$', '').replace('–', '').replace(',','') #basically just doing it like this to save code and not make it much complicated
@@ -40,5 +43,5 @@ def sql_normalizer(ram_dict):
     raw_listing = ram_dict.get('Original String')
     return RAM_object(brand, ram_type, speed, total_gb, modules, gb_per_module, price, source, raw_listing)
 
-test = sql_normalizer(test)
-print(vars(test))
+#test = sql_normalizer(test)
+#print(vars(test))
