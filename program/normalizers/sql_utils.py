@@ -1,16 +1,17 @@
+from dataclasses import dataclass
 #this module is to prepare the data for the sql integration 
 #class to organize all data for sql
-class RAM_object:
-    def __init__(self, brand, ram_type, speed, total_gb, modules, gb_per_module, price, source, raw_listing):
-        self.brand = brand
-        self.ram_type = ram_type
-        self.speed = speed
-        self.total_gb = total_gb
-        self.modules = modules
-        self.gb_per_module = gb_per_module
-        self.price = price
-        self.source = source
-        self.raw_listing = raw_listing
+@dataclass
+class RamProduct:
+    brand: str
+    ram_type: str
+    speed: int
+    total_gb: int
+    modules: int
+    gb_per_module: int
+    price: float
+    source: str
+    raw_listing: str
 
 #test = {'Ram Quantity': ['32', '16'], 'Ram Type': ['DDR5'], 'Ram Speed': ['6400'], 'Ram Brand': ['Other Brands'], 'Original String': 'V-COLOR Manta XSky DDR5 32GB (2x16GB) 6400MHz CL32 1.4V SK Hynix IC RGB Gaming Desktop Upgrade Memory Module Black, for AMD EXPO TMXSAL1664832KWK', 'Price': '$499.99–', 'Source': 'Newegg'}
 
@@ -41,7 +42,7 @@ def sql_normalizer(ram_dict):
     source = ram_dict.get('Source')
 
     raw_listing = ram_dict.get('Original String')
-    return RAM_object(brand, ram_type, speed, total_gb, modules, gb_per_module, price, source, raw_listing)
+    return RamProduct(brand, ram_type, speed, total_gb, modules, gb_per_module, price, source, raw_listing)
 
 #test = sql_normalizer(test)
 #print(vars(test))

@@ -37,8 +37,7 @@ def setup_logging():
 setup_logging()
 
 raw_data = ws.newegg_scrapper()
-normalized_strings = []
-
+normalized_data = []
 for i in raw_data:
     to_append = nz.normalizer(i.get('description'), i.get("price"), i.get('source'))
     print(to_append)
@@ -46,12 +45,8 @@ for i in raw_data:
     print(validation_flag)
     if validation_flag:
         sql_ready = squ.sql_normalizer(to_append)
-        normalized_strings.append(sql_ready)
+        normalized_data.append(sql_ready)
         print(sql_ready)
     else:
         continue
 
-#print(vars(normalized_strings[0]))
-#print(vars(normalized_strings[3]))
-#print(vars(normalized_strings[2]))
-#print(vars(normalized_strings[1]))
