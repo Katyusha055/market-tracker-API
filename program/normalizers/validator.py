@@ -2,7 +2,6 @@ import logging
 def validator(data):
     validate_flag = None
     for i in data:
-        validate_flag = None
         if not data.get(i):
             logging.warning(f'Listing skipped as it did not had the {i} data')
             validate_flag = False
