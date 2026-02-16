@@ -5,6 +5,7 @@ import program.scrapper.web_scrapper as ws
 import program.normalizers.normalizer as nz
 import program.normalizers.sql_utils as squ
 import program.normalizers.validator as val
+import program.db_utils.connection as con
 
 #setting up the logging system
 def setup_logging():
@@ -49,4 +50,3 @@ for i in raw_data:
         print(sql_ready)
     else:
         continue
-
