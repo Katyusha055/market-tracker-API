@@ -7,6 +7,7 @@ import program.normalizers.sql_utils as squ
 import program.normalizers.validator as val
 import program.db_utils.connect as con
 import program.db_utils.schema as sch
+import program.db_utils.writer as wrt
 
 #setting up the logging system
 def setup_logging():
@@ -38,19 +39,26 @@ def setup_logging():
 
 setup_logging()
 
-raw_data = ws.newegg_scrapper()
-normalized_data = []
-for i in raw_data:
-    to_append = nz.normalizer(i.get('description'), i.get("price"), i.get('source'))
-    #print(to_append)
-    validation_flag = val.validator(to_append)
-    #print(validation_flag)
-    if validation_flag:
-        sql_ready = squ.sql_normalizer(to_append)
-        normalized_data.append(sql_ready)
-        #print(sql_ready)
-    else:
-        continue
+def main():
+    raw_data = ws.newegg_scrapper()
+    normalized_data = []
+    for i in raw_data:
+        to_append = nz.normalizer(i.get('description'), i.get("price"), i.get('source'))
+        #print(to_append)
+        validation_flag = val.validator(to_append)
+        #print(validation_flag)
+        if validation_flag:
+            sql_ready = squ.sql_normalizer(to_append)
+            normalized_data.append(sql_ready)
+            #print(sql_ready)
+        else:
+            continue
 
-with con.connect() as conn:
-    sch.init_db(conn)
+    with con.connect() as conn:
+        sch.init_db(conn)
+        for i in normalized_data:
+            print(i)
+            wrt.write_data(conn, i)
+        logging.info('Data inserted into SQL database succesfully')
+
+main()

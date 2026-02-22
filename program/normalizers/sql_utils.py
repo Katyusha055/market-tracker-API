@@ -31,7 +31,7 @@ def sql_normalizer(ram_dict):
     else:
         modules = 1
     if modules == 1:
-        gb_per_module = None
+        gb_per_module = total_gb
     else:
         gb_per_module = int(Quantity_list[1])
 
