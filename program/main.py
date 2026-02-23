@@ -53,12 +53,26 @@ def main():
             #print(sql_ready)
         else:
             continue
-
+    
+    report = {
+        'Products Scrapped': 0,
+        'Duplicate Products': 0,
+        'New Products': 0,
+        'Price Data Inserted': 0
+    }
+    report['Products Scrapped'] = len(normalized_data)
     with con.connect() as conn:
         sch.init_db(conn)
-        for i in normalized_data:
-            print(i)
-            wrt.write_data(conn, i)
-        logging.info('Data inserted into SQL database succesfully')
 
-main()
+        for i in normalized_data:
+            was_new = wrt.write_data(conn, i) #this variable is to know if a product already exists or was added (will be true if it was new)
+            if was_new:
+                report['New Products'] += 1
+            else:
+                report['Duplicate Products'] += 1 
+            report['Price Data Inserted'] += 1
+        
+        logging.info('Data inserted into SQL database succesfully')
+    return report
+
+print(main())
