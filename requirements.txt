@@ -1,0 +1,14 @@
+# HTTP client used by the scraper to fetch product pages.
+requests
+
+# HTML parser used to extract structured RAM data from listings.
+beautifulsoup4
+
+# PostgreSQL driver used by db_utils/connect.py to persist normalized records.
+psycopg[binary]
+
+# Loads environment variables from .env for database credentials/config.
+python-dotenv
+
+# Test runner for the project's unit tests under tests/.
+pytest
