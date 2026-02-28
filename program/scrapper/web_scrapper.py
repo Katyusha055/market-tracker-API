@@ -13,6 +13,7 @@ def newegg_scrapper(total_pages: int = 20):
 
     for page_number in range(1, page_limit + 1):
         url = f'https://www.newegg.com/p/pl?d=ram&page={page_number}'
+        pages_failed = 0
         #validation of the request
         try: 
             response = requests.get(url, timeout=10)
@@ -36,7 +37,10 @@ def newegg_scrapper(total_pages: int = 20):
                     'source': 'Newegg'}
                 data.append(store)
         else:
-            raise ConnectionError(f'Unable to retrieve data, code: {response.status_code}')
+            logger.warning(f'Page {page_number} failed with status code {response.status_code}, Pages failed: {pages_failed}')
+            pages_failed += 1 #this is so if one page fails it doesn't crash the entire scrapper
+        if pages_failed == 5:
+            raise ConnectionError(f'Failed to retrieve data from URL, too many pages have failed to connect')
 
         time.sleep(1)
 
