@@ -7,7 +7,7 @@ import time
 #initializing logger for the module
 logger = logging.getLogger(__name__)
 
-def newegg_scrapper(total_pages: int = 20):
+def newegg_scrapper(total_pages: int = 5):
     page_limit = min(total_pages, 20)
     data = []
     pages_failed = 0

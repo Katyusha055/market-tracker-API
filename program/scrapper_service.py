@@ -39,8 +39,8 @@ def setup_logging():
 
 setup_logging()
 
-def main():
-    raw_data = ws.newegg_scrapper()
+def scrapper_pipeline(pages):
+    raw_data = ws.newegg_scrapper(pages)
     normalized_data = []
     for i in raw_data:
         to_append = nz.normalizer(i.get('description'), i.get("price"), i.get('source'))
@@ -75,4 +75,3 @@ def main():
         logging.info('Data inserted into SQL database succesfully')
     return report
 
-print(main())
