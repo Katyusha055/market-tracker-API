@@ -1,3 +1,6 @@
+# FastAPI framework 
+fastapi[standard]
+
 # HTTP client used by the scraper to fetch product pages.
 requests
 
