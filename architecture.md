@@ -48,3 +48,7 @@ Responsible for exposing HTTP endpoints and triggering the full pipeline.
 **Files in this layer:**
 - `api/app.py`
 - `program/scrapper_service.py`
+## 5) Data Structure 
+The data structure follows the pattern of ram listings in the internet, it includes 
+
+Price, Brand, Speed, Modules, GB_per_module, total_gb, ram_type, source and raw_listing
